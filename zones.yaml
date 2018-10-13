@@ -1,0 +1,20 @@
+  - name: School
+    latitude: 40.921130 
+    longitude: -74.674523
+    radius: 150
+    icon: mdi:school
+  - name: Kims Work
+    latitude: 40.982403
+    longitude: -74.610902
+    radius: 100
+    icon: mdi:cash-usd
+  - name: Shoprite
+    latitude: 40.867689
+    longitude: -74.647777
+    radius: 100
+    icon: mdi:store
+  - name: 3-in-1 Deli
+    latitude: 40.934512
+    longitude: -74.662697
+    radius: 20
+    icon: mdi:store

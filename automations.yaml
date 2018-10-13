@@ -1,0 +1,154 @@
+- alias: Humidifer Turned Off
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.humidifier_power
+      below: 100
+  action:
+    - service: ifttt.trigger
+      data_template: 
+        event: "humidifier_power_changed"
+        value1: "turned off"
+        value2: "{{ states('sensor.humidifier_power') }}"
+
+- alias: Humidifer Turned On
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.humidifier_power
+      above: 100
+  action:
+    - service: ifttt.trigger
+      data_template:
+        event: "humidifier_power_changed"
+        value1: "turned on"
+        value2: "{{ states('sensor.humidifier_power') }}"
+
+
+- alias: Plant A Moisture Wet Alert
+  trigger:
+    - platform: state
+      entity_id: sensor.planta_moisture
+      from: 'Dry'
+      to: 'Wet'
+  action:
+    - service: ifttt.trigger
+      data: {"event":"planta_moisture_changed", "value1":"Plant A","value2":"wet" }
+
+
+- alias: Plant A Moisture Dry Alert
+  trigger:
+    - platform: state
+      entity_id: sensor.planta_moisture
+      from: 'Wet'
+      to: 'Dry'
+  action:
+    - service: ifttt.trigger
+      data: {"event":"planta_moisture_changed", "value1":"Plant A","value2":"dry" }
+
+
+- alias: Bad plant humidity too low
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.planta_humidity
+      below: 40
+      for:
+        minutes: 5
+  action:
+    - service: ifttt.trigger
+      data_template:
+        event: "planta_bad_metric"
+        value1: "{{ states('sensor.planta_humidity') }}"
+        value2: "humidity"
+        value3: "40-60%"
+
+
+- alias: Bad plant humidity too high
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.planta_humidity
+      above: 60
+      for:
+        minutes: 5
+  action:
+    - service: ifttt.trigger
+      data_template:
+        event: "planta_bad_metric"
+        value1: "{{ states('sensor.planta_humidity') }}"
+        value2: "humidity"
+        value3: "40-60%"
+
+
+- alias: Bad plant temp too low
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.planta_temp
+      below: 70
+      for:
+        minutes: 5
+  action:
+    - service: ifttt.trigger
+      data_template:
+        event: "planta_bad_metric"
+        value1: "{{ states('sensor.planta_temp') }}"
+        value2: "temp"
+        value3: "70-85%"
+
+- alias: Bad plant temp too high
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.planta_temp
+      above: 85
+      for:
+        minutes: 5
+  action:
+    - service: ifttt.trigger
+      data_template:
+        event: "planta_bad_metric"
+        value1: "{{ states('sensor.planta_temp') }}"
+        value2: "temp"
+        value3: "70-85%"
+
+  
+- alias: Kim Left Work
+  trigger:
+    - platform: zone
+      event: leave
+      zone: zone.kims_work
+      entity_id: device_tracker.kim1
+  action:
+    - service: scene.turn_on
+      entity_id: scene.arrivedathome
+
+- alias: Going To Sleep
+  trigger:
+    - platform: state
+      entity_id: switch.front_porch_light
+      from: 'on'
+      to: 'off'
+  condition: 
+    - condition: time
+      after: '21:00:00'
+      before: '02:00:00'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.nightlight
+
+# Turns on lights 1 hour before sunset if people are home
+# and if people get home between 16:00-23:00
+- alias: 'Rule 1 Light on in the evening'
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: '-01:00:00'
+    - platform: state
+      entity_id: group.all_devices
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: group.all_devices
+      state: 'home'
+    - condition: time
+      after: '16:00:00'
+      before: '23:00:00'
+  action:
+    service: scene.turn_on
+    entity_id: scene.evening_light

@@ -1,0 +1,32 @@
+sensor.weather_humidity:
+  friendly_name: Outside Humidity
+sensor.weather_temperature:
+  friendly_name: Outside Temp
+sensor.dht_sensor_humidity:
+  friendly_name: Plant Humidity
+sensor.dht_sensor_temperature:
+  friendly_name: Plant Temp
+sensor.weather_symbol:
+  friendly_name: Outside Weather
+light.hue_white_lamp_1:
+  hidden: true
+light.hue_white_lamp_2: {}
+remote.living_room:
+  hidden: true
+device_tracker.kimsipad:
+  hidden: true
+device_tracker.poopsipad:
+  hidden: true
+device_tracker.kimmbp:
+  hidden: true
+device_tracker.kimberlesapple_watch:
+  hidden: true
+device_tracker.kim1:
+  friendly_name: Kimmmy
+  entity_picture: https://scontent-lga3-1.cdninstagram.com/vp/8467a92d6767dc30926a13d1bae17998/5C259DD1/t51.2885-19/11875531_1472214363099691_393042916_a.jpg
+device_tracker.emilysiphone:
+  friendly_name: Emily
+  entity_picture: https://scontent-lga3-1.cdninstagram.com/vp/3517b4cbd4f3b3391b9ac7952525d72a/5C357DE2/t51.2885-19/s150x150/41670937_2157326084528545_441699075285319680_n.jpg
+device_tracker.whiterabbit:
+  friendly_name: Alex
+  entity_picture: https://scontent-lga3-1.cdninstagram.com/vp/c2e2ef50403da5efd9ff6a76ea125589/5C39A437/t51.2885-19/s150x150/11352078_1478747525769529_727968590_a.jpg

@@ -1,0 +1,15 @@
+  - platform: generic
+    still_image_url: http://192.168.1.102:50005/cam/cam_pic.php
+    name: PiCam
+    username: !secret picam_username
+    password: !secret picam_password 
+  - platform: generic
+    still_image_url: http://192.168.1.19/photo
+    name: Front Door
+    username: !secret picam_username
+    password: !secret picam_password
+  - platform: generic
+    still_image_url: http://192.168.1.7/photo
+    name: Driveway
+    username: !secret picam_username
+    password: !secret picam_password

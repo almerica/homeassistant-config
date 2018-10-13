@@ -1,0 +1,61 @@
+  - platform: mqtt
+    state_topic: "esp8266-a/sensor"
+    value_template: "{{ value_json.humidity | round(1) }}"
+    name: "esp8266-a humidity"
+    unit_of_measurement: "%"
+    icon: mdi:weather-fog
+
+  - platform: mqtt
+    state_topic: "esp8266-a/sensor"
+    value_template: "{{ value_json.lux | round(1) }}"
+    name: "esp8266-a lux"
+    unit_of_measurement: "lx"
+    icon: mdi:ceiling-light
+
+  - platform: mqtt
+    state_topic: "esp8266-a/sensor"
+    value_template: "{{ value_json.tempF | round(1) }}"
+    name: "esp8266-a tempF"
+    unit_of_measurement: "°F"
+    icon: mdi:temperature-fahrenheit
+
+  - platform: mqtt
+    state_topic: "esp8266-a/sensor"
+    value_template: "{{ value_json.heatIndexF | round(1) }}"
+    name: "esp8266-a heatIndexF"
+    unit_of_measurement: "°F"
+    icon: mdi:temperature-fahrenheit
+
+  - platform: mqtt
+    state_topic: "esp8266-a/sensor"
+    value_template: "{{ value_json.moisture | round(1) }}"
+    name: "esp8266-a Moisture"
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "attic/sensor"
+    value_template: "{{ value_json.humidity | round(1) }}"
+    name: "Attic humidity"
+    unit_of_measurement: "%"
+    icon: mdi:weather-fog
+
+  - platform: mqtt
+    state_topic: "attic/sensor"
+    value_template: "{{ value_json.brightness_pct | round(1) }}"
+    name: "Attic Brightness"
+    unit_of_measurement: "%"
+    icon: mdi:sunglasses
+
+  - platform: mqtt
+    state_topic: "attic/sensor"
+    value_template: "{{ value_json.tempF | round(1) }}"
+    name: "Attic tempF"
+    unit_of_measurement: "°F"
+    icon: mdi:temperature-fahrenheit
+
+  - platform: mqtt
+    state_topic: "attic/sensor"
+    value_template: "{{ value_json.heatIndexF | round(1) }}"
+    name: "Attic heatIndexF"
+    unit_of_measurement: "°F"
+    icon: mdi:temperature-fahrenheit

@@ -1,0 +1,175 @@
+
+background: center / cover no-repeat url("/background.png") fixed
+excluded_entities:
+  - weblink.router
+
+resources:
+  - url: /local/surveillance-card.js?v=0
+    type: module
+  - url: /local/vertical-stack-in-card.js?v=0.0.2
+    type: js
+  - url: /local/content-card-singleline.js?v=0.0.1
+    type: js
+views:
+#  - title: Example
+#    cards:
+#      - type: "custom:content-card-singleline"
+#        entity: light.master_bedroom
+
+  - title: Home
+    id: home
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+
+    cards:
+      - type: glance
+        title: Family
+        entities:
+          - entity: device_tracker.emilysiphone
+            show_state: false
+          - device_tracker.kim1
+          - device_tracker.whiterabbit
+
+      - type: entities
+        title: Lights
+        entities:
+          - entity: light.living_room
+            tap_action: toggle
+          - entity: light.kitchen
+          - entity: light.emilys_room
+          - entity: light.master_bedroom
+          - entity: light.basement
+
+
+      - type: picture-entity
+        entity: camera.picam
+
+
+      - type: conditional
+        name: UPS
+        show_empty: false
+        conditions:
+          - entity: sensor.ups
+            state_not: "0"
+        card:
+          - type: picture
+            image: https://img-aws.ehowcdn.com/750x428p/photos.demandstudios.com/getty/article/94/126/450772746.jpg
+      
+      - type: weather-forecast
+        entity: weather.weather
+
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: entities
+            title: Humidifier
+            entities:
+              - entity: sensor.humidifier_today_cost
+                name: Today's Cost
+              - entity: sensor.humidifier_yesterday_cost
+                name: Yesterday's Cost    
+          - type: glance
+            column_width: calc(100% / 4)
+            entities:
+              - entity: sensor.humidifier_today
+                name: Today
+              - entity: sensor.humidifier_yesterday
+                name: Yesterday
+              - entity: sensor.humidifier_current
+                name: Current
+              - entity: sensor.humidifier_power
+                name: Power
+              - entity: sensor.humidifier_voltage
+                name: Voltage
+
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: entities
+            title: Plant
+            entities:
+              - entity: sensor.esp8266a_summary
+              - entity: sensor.plant_today_cost
+                name: Today's Cost
+              - entity: sensor.plant_yesterday_cost
+                name: Yesterday's Cost
+          - type: glance
+            column_width: calc(100% / 4)
+            entities:
+              - entity: sensor.esp8266a_humidity
+                name: Humidity
+              - entity: sensor.esp8266a_moisture
+                name: Moisture
+              - entity: sensor.esp8266a_tempf
+                name: Temperature
+              - entity: sensor.esp8266a_lux
+                name: Lux
+          - type: glance
+            column_width: calc(100% / 4)
+            entities:
+              - entity: sensor.plant_today
+                name: Today
+              - entity: sensor.plant_yesterday
+                name: Yesterday
+              - entity: sensor.plant_current
+                name: Current
+              - entity: sensor.plant_power
+                name: Power
+              - entity: sensor.plant_voltage
+                name: Voltage
+
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: glance
+            title: Plant Shelf
+            column_width: calc(100% / 4)
+            entities:
+              - entity: sensor.attic_humidity
+                name: Humidity
+              - entity: sensor.attic_tempf
+                name: Temperature
+              - entity: sensor.attic_heatindexf
+                name: Head Index
+              - entity: sensor.attic_brightness
+                name: Brightness
+
+      - type: entity-filter
+        show_empty: false
+        entities:
+          - media_player.living_room
+        state_filter:
+          - 'unavailable'
+        card:
+          - type: media-control
+            entity: media_player.living_room
+  
+      - type: history-graph
+        hours_to_show: 6
+        title: Temperature
+        entities:
+          - entity: sensor.esp8266a_tempf
+            name: Morning Glory
+          - entity: sensor.attic_tempf
+          - entity: sensor.attic_heatindexf
+          - entity: sensor.yweather_temperature
+          - entity: sensor.weather_temperature
+            name: Outside
+      - type: history-graph
+        hours_to_show: 6
+        title: Humidity
+        entities:
+          - entity: sensor.esp8266a_humidity
+            name: Morning Glory
+          - entity: sensor.attic_humidity
+          - entity: sensor.yweather_humidity
+            name: Outside
+  - title: Surveillance
+    icon: mdi:cctv
+    panel: true
+    cards:
+      - type: custom:surveillance-card
+        thumb_interval: 15
+        update_interval: 2
+        cameras:
+          - entity: camera.picam
+          - entity: camera.driveway
+          - entity: camera.front_door
+

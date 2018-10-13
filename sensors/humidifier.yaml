@@ -1,0 +1,71 @@
+  - platform: mqtt
+    state_topic: "tele/sonoff1/SENSOR"
+    value_template: "{{ value_json.ENERGY.Current | round(2) }}"
+    name: "Humidifier Current"
+    unit_of_measurement: "Amps"
+    icon: mdi:current-ac
+
+  - platform: mqtt
+    state_topic: "tele/sonoff1/SENSOR"
+    value_template: "{{ value_json.ENERGY.Today | round(1) }}"
+    name: "Humidifier Today"
+    unit_of_measurement: "kWh"
+    icon: mdi:power-plug
+
+  - platform: mqtt
+    state_topic: "tele/sonoff1/SENSOR"
+    value_template: "{{ value_json.ENERGY.Power | round(1) }}"
+    name: "Humidifier Power"
+    unit_of_measurement: "Watts"
+  
+  - platform: mqtt
+    state_topic: "tele/sonoff1/SENSOR"
+    value_template: "{{ value_json.ENERGY.Yesterday | round(1) }}"
+    name: "Humidifier Yesterday"
+    unit_of_measurement: "kWh"
+    icon: mdi:power-plug
+  
+  - platform: template
+    sensors:
+      esp8266a_summary:
+        friendly_name: Summary
+        value_template: >-
+          Humidity 
+          {% if states('sensor.esp8266a_humidity') | float > 60 %}
+            high
+          {% elif states('sensor.esp8266a_humidity') | float < 40 %}
+            low
+          {% else %}
+            good
+          {% endif %}
+          , Temperature
+          {% if states('sensor.esp8266a_tempf') | float > 85 %}
+            high
+          {% elif states('sensor.esp8266a_tempf') | float < 70 %}
+            low
+          {% else %}
+            good
+          {% endif %}
+        
+      humidifier_status:
+        friendly_name: Humidifier Status
+        value_template: >-
+          {% if states('sensor.humidifier_power') | float > 400 %}
+            on
+          {% elif states('sensor.humidifier_power') | float > 0 %}
+            standby
+          {% else %}
+            off
+          {% endif %}
+          
+      humidifier_today_cost:
+        friendly_name: Humidifier Today Cost
+        unit_of_measurement: "$"
+        value_template: >-
+          {{ states.sensor.humidifier_today.state | multiply(0.13) | round(2) }}
+      humidifier_yesterday_cost:
+        friendly_name: Humidifier Yesterday Cost
+        unit_of_measurement: "$"
+        value_template: >-
+          {{ states.sensor.humidifier_yesterday.state | multiply(0.13) | round(2) }}
+

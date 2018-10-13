@@ -1,0 +1,64 @@
+
+kimmbp:
+  hide_if_away: false
+  icon:
+  mac:
+  name: kimMBP
+  picture:
+  track: true
+
+poopsipad:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Poop’s iPad
+  picture:
+  track: true
+
+kim1:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Kim1
+  picture:
+  track: true
+
+kimsipad:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Kims iPad
+  picture:
+  track: true
+
+kimberlesapple_watch:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Kimberle’s Apple Watch
+  picture:
+  track: true
+
+emilysiphone:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Emily's iPhone
+  picture:
+  track: true
+
+whiterabbit:
+  hide_if_away: false
+  icon:
+  mac:
+  name: White Rabbit
+  picture:
+  track: true
+
+hypnos:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Hypnos
+  picture:
+  track: true

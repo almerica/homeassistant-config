@@ -1,0 +1,22 @@
+  - name: ArrivedAtHome
+    entities:
+      switch.front_porch_light: on
+
+  - name: EveningLight
+    entities: 
+      switch.front_porch_light: on
+      light.living_room: on
+      light.kitchen_strip: on
+      light.emilys_room: on
+
+  - name: Nightlight
+    entities: 
+      light.living_room: off
+      light.kitchen: off
+      light.hue_white_lamp_2:
+        state: on
+        brightnes_pct: 10
+      light.emilys_room:
+        state: on
+        brightness_pct: 5
+
